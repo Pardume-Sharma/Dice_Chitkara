@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DICE-Register</title>
+   <link rel="icon" href="https://th.bing.com/th/id/R.d05af035153f86243516669f66e36dbb?rik=sFwUlPF5vIJc9Q&riu=http%3a%2f%2fpngimg.com%2fuploads%2fdice%2fdice_PNG95.png&ehk=Z5hyEvAFSVzlimp1%2fNIPch%2fTqWlD5u26sw8iqAi%2f%2fno%3d&risl=&pid=ImgRaw&r=0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo" style="color:blueviolet">DICE</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">Pardume Sharma</h3>
+         <p class="role">student</p>
+         <a href="profile.html" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">login</a>
+            <a href="register.html" class="option-btn">register</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Pardume Sharma</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="home.html"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>Members</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="form-container">
+
+   <form action="" method="post" enctype="multipart/form-data">
+      <h3>register now</h3>
+      <p>Your name <span>*</span></p>
+      <input type="text" name="name" id="name"placeholder="Enter your name" required maxlength="50" class="box">
+      
+      <p>Your email <span>*</span></p>
+      <input type="email" name="email" id="email"placeholder="Enter your email" required maxlength="50" class="box">
+      
+      <p>Roll number <span>*</span></p>
+      <input type="number" name="roll_number" id="roll" placeholder="Enter your roll number" required maxlength="10" class="box">
+      
+      <p>Your Branch and year <span>*</span></p>
+      <input type="text" class="box" placeholder="Enter your Branch and year (eg: CSE 2 )">
+
+      <p>Your password <span>*</span></p>
+      <input type="password" name="pass" id="pass"placeholder="Enter your password" required maxlength="20" class="box">
+      
+      <p>Confirm password <span>*</span></p>
+      <input type="password" name="c_pass" id="cpass"placeholder="Confirm your password" required maxlength="20" class="box">
+      
+      <button class="btn" onclick="register()">register new</button>
+
+   </form>
+   <!-- <script>      
+      var name = document.getElementById("name")
+      var email = document.getElementById("email")
+      var cpass = document.getElementById("cpass")
+      var pass = document.getElementById("pass")
+
+      function register(){
+         if(pass.value == cpass.value){
+            localStorage.setItem(email,pass)
+         }else{
+            alert("Password Doesn't Match")
+         }
+      }
+   </script> -->
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script>
+        function register() {
+            // Get form data
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var rollNumber = document.getElementById("roll").value;
+            var batch = document.getElementById("batch").value;
+            var password = document.getElementById("pass").value;
+            var confirmPassword = document.getElementById("cpass").value;
+
+            // Validate password and confirm password
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please confirm your password.");
+                return;
+            }
+
+            // Create a new Excel workbook
+            var workbook = XLSX.utils.book_new();
+            var sheetData = [
+                ["Name", "Email", "Roll Number", "Batch", "Password"],
+                [name, email, rollNumber, batch, password]
+            ];
+
+            // Add the data to a worksheet
+            var worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Registration Data");
+
+            // Save the workbook as an Excel file
+            XLSX.writeFile(workbook, "registrationData.xlsx");
+
+            alert("Registration successful. Data exported to registrationData.xlsx");
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Chitkara University</span> | all rights reserved!
+
+</footer>
+
+<script src="js/script.js"></script>
+
+   
+</body>
+</html>
